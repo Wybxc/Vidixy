@@ -1,12 +1,4 @@
-from fastapi import FastAPI
 import click
-
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
 
 
 @click.command()
@@ -14,6 +6,7 @@ async def root():
 @click.option("--port", default=8000, help="Port to run the server on")
 def main(host: str, port: int):
     import uvicorn
+    from .application import app
 
     uvicorn.run(app, host=host, port=port)  # type: ignore
 

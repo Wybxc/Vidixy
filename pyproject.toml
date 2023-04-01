@@ -2,21 +2,20 @@
 name = "vidixy"
 version = "0.1.0"
 description = "Vidixy is a node-based editor that simplifies the video encoding process."
-authors = [
-    {name = "忘忧北萱草", email = "wybxc@qq.com"},
-]
-dependencies = [
-    "fastapi>=0.95.0",
-    "uvicorn[standard]>=0.21.1",
-    "click>=8.1.3",
-]
+authors = [{ name = "忘忧北萱草", email = "wybxc@qq.com" }]
+dependencies = ["fastapi>=0.95.0", "uvicorn[standard]>=0.21.1", "click>=8.1.3"]
 requires-python = ">=3.10"
-license = {text = "GPL-3.0"}
+license = { text = "GPL-3.0" }
 
-[tool.pdm]
 [tool.pdm.dev-dependencies]
-dev = [
-    "black>=23.3.0",
-    "isort>=5.12.0",
-    "pre-commit>=3.2.1",
-]
+dev = ["black>=23.3.0", "pre-commit>=3.2.1", "aiohttp>=3.8.4"]
+
+[tool.pdm.scripts]
+frontend.shell = "cd frontend && pnpm build"
+vite.shell = "cd frontend && pnpm dev"
+
+serve.cmd = "uvicorn vidixy.application:app --reload"
+start.composite = ["frontend", "serve"]
+
+dev.cmd = "uvicorn vidixy.application:app --port 8000 --reload"
+dev.env = { VIDIXY_DEV = "1" }
