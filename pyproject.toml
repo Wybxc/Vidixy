@@ -14,8 +14,8 @@ dev = ["black>=23.3.0", "pre-commit>=3.2.1", "aiohttp>=3.8.4"]
 frontend.shell = "cd frontend && pnpm build"
 vite.shell = "cd frontend && pnpm dev"
 
-serve.cmd = "uvicorn vidixy.application:app --reload"
+serve.cmd = "python -m vidixy --reload"
 start.composite = ["frontend", "serve"]
 
-dev.cmd = "uvicorn vidixy.application:app --port 8000 --reload"
+dev.cmd = "python -m vidixy --port 8000 --reload"
 dev.env = { VIDIXY_DEV = "1" }
